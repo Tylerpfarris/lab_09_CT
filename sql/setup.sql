@@ -24,3 +24,13 @@ CREATE TABLE gin (
     type_of_still TEXT,
     style TEXT NOT NULL
 );
+
+DROP TABLE IF EXISTS nonsense;
+
+CREATE TABLE nonsense (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    farts BOOLEAN,
+    giggles INTEGER NOT NULL,
+    stubbed_toes BOOLEAN NOT NULL,
+    late_night_snack TEXT NOT NULL
+);

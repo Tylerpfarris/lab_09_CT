@@ -52,6 +52,8 @@ describe('gin test routes', () => {
         return setup(pool)
     });
 
+    afterAll(() => pool.end())
+
     it('inserts a new gin object into the ginDB', async () => {
         const res = await request(app)
             .post('/api/v1/gin')
@@ -60,21 +62,21 @@ describe('gin test routes', () => {
     })
 
     it('returns all items in the ginDB', async () => {
-        Gin.insert(newGin);
+       await Gin.insert(newGin);
         const res = await request(app)
             .get('/api/v1/gin');
         expect(res.body).toEqual([dBNewGin]);
     })
 
     it('returns an item selected by ID from the ginDB', async () => {
-        Gin.insert(newGin);
+        await Gin.insert(newGin);
         const res = await request(app)
             .get('/api/v1/gin/1');
         expect(res.body).toEqual(dBNewGin);
     })
 
     it('updates an item selected by ID in the ginDb', async () => {
-        Gin.insert(newGin);
+        await Gin.insert(newGin);
         const res = await request(app)
             .put('/api/v1/gin/1')
             .send(updatedGin);
@@ -83,7 +85,7 @@ describe('gin test routes', () => {
 
     it('deletes an item selected by ID fro, the ginDB',
         async () => {
-            Gin.insert(deletedGin);
+           await Gin.insert(deletedGin);
             const res = await request(app)
                 .delete('/api/v1/gin/1')
             expect(res.body).toEqual(dbDeletedGin);

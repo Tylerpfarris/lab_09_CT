@@ -46,6 +46,7 @@ describe('mezcal test routes', () => {
     return setup(pool);
   });
 
+  afterAll(() => pool.end())
 
   it('inserts a new mezcal object into the db', async () => {
     const res = await request(app)
@@ -56,7 +57,7 @@ describe('mezcal test routes', () => {
   })
 
   it('returns all mezcal from the db ', async () => {
-    Mezcal.insert(newMezcal);
+    await Mezcal.insert(newMezcal);
     const res = await request(app)
       .get('/api/v1/mezcal');
     
@@ -64,7 +65,7 @@ describe('mezcal test routes', () => {
   })
 
   it('returns a mezcal selected by id', async () => {
-    Mezcal.insert(newMezcal);
+    await Mezcal.insert(newMezcal);
     const res = await request(app)
       .get('/api/v1/mezcal/1');
     
@@ -72,7 +73,7 @@ describe('mezcal test routes', () => {
   })
 
   it('updates a mezcal selected by id', async () => {
-    Mezcal.insert(newMezcal);
+    await Mezcal.insert(newMezcal);
     const res = await request(app)
       .put('/api/v1/mezcal/1')
       .send(updatedMezcal);
@@ -81,7 +82,7 @@ describe('mezcal test routes', () => {
   })
 
   it('deletes a mezcal from the db by id', async () => {
-    Mezcal.insert(deleteMezcal);
+    await Mezcal.insert(deleteMezcal);
     const res = await request(app)
       .delete(`/api/v1/mezcal/1`)
     
