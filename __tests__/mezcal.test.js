@@ -41,7 +41,7 @@ const dbDeletedMezcal = {
   id: '1'
 }
 
-describe('lab_09_CT routes', () => {
+describe('mezcal test routes', () => {
   beforeEach(() => {
     return setup(pool);
   });
